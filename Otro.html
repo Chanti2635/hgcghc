@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background-color: #ffb6c1;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .messages-container {
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .love-message {
+            color: #ff1493;
+            font-size: 24px;
+            margin: 10px;
+            animation: fadeIn 1s;
+        }
+
+        .add-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-button:hover {
+            background-color: #ff1493;
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: magenta;
+            animation: floatUp 8s linear infinite;
+        }
+
+        .tulip {
+            position: fixed;
+            width: 50px;
+            height: 80px;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .tulip::before {
+            content: '🌷';
+            font-size: 40px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="messages-container" id="messagesContainer">
+        <div class="love-message">I love you!</div>
+    </div>
+    <button class="add-button" onclick="addMultilingualMessages()">Add Messages</button>
+
+    <script>
+        // Crear tulipanes en los bordes
+        function createTulips() {
+            const spacing = 150;
+            const height = window.innerHeight;
+            
+            for (let i = 0; i < height; i += spacing) {
+                // Tulipanes izquierdos
+                const leftTulip = document.createElement('div');
+                leftTulip.className = 'tulip';
+                leftTulip.style.left = '10px';
+                leftTulip.style.top = i + 'px';
+                document.body.appendChild(leftTulip);
+
+                // Tulipanes derechos
+                const rightTulip = document.createElement('div');
+                rightTulip.className = 'tulip';
+                rightTulip.style.right = '10px';
+                rightTulip.style.top = i + 'px';
+                document.body.appendChild(rightTulip);
+            }
+        }
+
+        // Crear corazones flotantes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            document.body.appendChild(heart);
+
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        // Agregar mensajes multilingües
+        function addMultilingualMessages() {
+            const messages = [
+                "I love you! (English)",
+                "Te amo! (Español)",
+                "Je t'aime! (Français)",
+                "Ti amo! (Italiano)",
+                "Ich liebe dich! (Deutsch)",
+                "愛してる! (日本語)",
+                "사랑해! (한국어)",
+                "Eu te amo! (Português)",
+                "Я тебя люблю! (Русский)",
+                "我爱你! (中文)"
+            ];
+
+            const container = document.getElementById('messagesContainer');
+            messages.forEach(message => {
+                const div = document.createElement('div');
+                div.className = 'love-message';
+                div.textContent = message;
+                container.appendChild(div);
+            });
+        }
+
+        // Inicializar
+        createTulips();
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
