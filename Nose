@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Mensajes de Amor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+        }
+        .mensaje {
+            color: #ff4d4d;
+            margin: 10px;
+            font-size: 20px;
+            animation: latido 1s infinite;
+        }
+        @keyframes latido {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div id="contenedor"></div>
+    <script>
+        const contenedor = document.getElementById('contenedor');
+        for(let i = 0; i < 100; i++) {
+            const mensaje = document.createElement('div');
+            mensaje.className = 'mensaje';
+            mensaje.textContent = 'I love you!';
+            contenedor.appendChild(mensaje);
+        }
+    </script>
+</body>
+</html>
